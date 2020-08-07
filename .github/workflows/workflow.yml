@@ -1,0 +1,72 @@
+name: PyStan-Jupyter
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tests:
+    name: Install and test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: [3.8]
+      fail-fast: false
+    steps:
+      - name: Checkout github
+        uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install python dependencies
+        run: |
+          pip install --no-cache-dir --upgrade pip
+          pip install --no-cache-dir jupyterlab wheel
+          pip install --no-cache-dir -r requirements.txt
+      - name: Build wheel
+        run: |
+          python setup.py bdist_wheel
+          pip install --no-cache-dir dist/*.whl
+      - name: Run notebook
+        run: |
+          cd tests
+          jupyter nbconvert --to notebook --inplace --ExecutePreprocessor.timeout=500 --execute example_pystan_jupyter.ipynb
+  publish:
+    name: Publish
+    runs-on: ${{ matrix.os }}
+    needs: tests
+    if: startsWith(github.ref, 'refs/tags/')
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.8]
+      fail-fast: false
+    steps:
+      - name: Checkout github
+        uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install python dependencies
+        run: |
+          pip install --no-cache-dir --upgrade pip
+          pip install --no-cache-dir twine wheel
+          pip install --no-cache-dir -r requirements.txt
+      - name: Build wheel
+        run: |
+          python setup.py bdist_wheel
+          pip install --no-cache-dir dist/*.whl
+      - name: Upload wheels
+        run: |
+          twine upload -u __token__ -p ${{ secrets.TWINE_PASSWORD }} --skip-existing dist/*
+      - uses: actions/upload-artifact@v2
+        with:
+          name: wheel
+          path: dist/
