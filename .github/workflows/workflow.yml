@@ -65,7 +65,7 @@ jobs:
           pip install --no-cache-dir dist/*.whl
       - name: Upload wheels
         run: |
-          echo "twine upload --repository-url https://test.pypi.org/legacy/ -u __token__ -p ${TWINE_PASSWORD} --skip-existing dist/*"
+          echo "twine upload --repository-url https://test.pypi.org/legacy/ -u __token__ -p ${TWINE_PASSWORD_TEST} --skip-existing dist/*"
       - uses: actions/upload-artifact@v2
         with:
           name: wheel
