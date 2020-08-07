@@ -3,12 +3,12 @@ name: PyStan-Jupyter
 on:
   push:
     branches:
-      - 'main'
+      - main
     tags:
       - '*'
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   tests:
@@ -42,6 +42,7 @@ jobs:
     name: Install and test
     runs-on: ${{ matrix.os }}
     needs: build
+    if: startsWith(github.ref, 'refs/tags/')
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -53,6 +54,7 @@ jobs:
           pip install twine
           ls .
           ls dist
+                    # twine upload --repository testpypi dist/*
         if: matrix.os == 'ubuntu-latest'
       - uses: actions/upload-artifact@v2
         with:
