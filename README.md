@@ -1,2 +1,12 @@
 # pystan-jupyter
-Enable PyStan(3+) use on Jupyter Notebook/Lab
+Enable PyStan3 use on Jupyter Notebook/Lab.
+
+At the start of the Notebook
+
+```ipython
+import stan_jupyter as stan
+
+...
+posterior = stan.build(program_code)
+fit = posterior.sample(num_chains=4)
+```
