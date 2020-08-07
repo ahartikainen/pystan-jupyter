@@ -27,13 +27,13 @@ jobs:
           python-version: '3.8'
       - name: Install python dependencies
         run: |
-          pip install --upgrade pip
-          pip install jupyterlab wheel
-          pip install -r requirements.txt
+          pip install --no-cache-dir --upgrade pip
+          pip install --no-cache-dir jupyterlab wheel
+          pip install --no-cache-dir -r requirements.txt
       - name: Build wheel
         run: |
           python setup.py bdist_wheel
-          pip install dist/*.whl
+          pip install --no-cache-dir dist/*.whl
       - name: Run notebook
         run: |
           cd tests
@@ -54,7 +54,7 @@ jobs:
           pip install twine
           ls .
           ls dist
-                    # twine upload --repository testpypi dist/*
+          echo "twine upload --repository testpypi dist/*"
         if: matrix.os == 'ubuntu-latest'
       - uses: actions/upload-artifact@v2
         with:
