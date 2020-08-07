@@ -1,0 +1,33 @@
+name: PyStan-Jupyter
+
+on:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - '*'
+
+jobs:
+  test_install:
+    name: Install
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: [3.8]
+      fail-fast: false
+    steps:
+      - name: Checkout github
+        uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install python dependencies
+        run: |
+          pip install --upgrade pip
+          pip install jupyterlab
+          pip install .
+      - name: Run notebook
+        run: |
+          cd tests
+          jupyter nbconvert --to notebook --inplace --execute example_pystan_jupyter.ipynb
