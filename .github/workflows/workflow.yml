@@ -11,7 +11,7 @@ on:
       - master
 
 jobs:
-  test_install:
+  tests:
     name: Install and test
     runs-on: ${{ matrix.os }}
     strategy:
@@ -38,10 +38,23 @@ jobs:
         run: |
           cd tests
           jupyter nbconvert --to notebook --inplace --ExecutePreprocessor.timeout=500 --execute example_pystan_jupyter.ipynb
+  publish:
+    name: Install and test
+    runs-on: ${{ matrix.os }}
+    needs: build
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.8]
+      fail-fast: false
+    steps:
       - name: Upload wheels
         run: |
           pip install twine
-          echo "CURRENT"
           ls .
-          echo "DIST"
           ls dist
+        if: matrix.os == 'ubuntu-latest'
+      - uses: actions/upload-artifact@v2
+        with:
+          name: wheel
+          path: dist/
