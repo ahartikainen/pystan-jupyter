@@ -30,4 +30,4 @@ jobs:
       - name: Run notebook
         run: |
           cd tests
-          jupyter nbconvert --to notebook --inplace --execute example_pystan_jupyter.ipynb
+          jupyter nbconvert --to notebook --inplace --ExecutePreprocessor.timeout=500 --execute example_pystan_jupyter.ipynb
