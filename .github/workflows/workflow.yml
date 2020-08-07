@@ -12,7 +12,7 @@ on:
 
 jobs:
   test_install:
-    name: Install
+    name: Install and test
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -28,9 +28,20 @@ jobs:
       - name: Install python dependencies
         run: |
           pip install --upgrade pip
-          pip install jupyterlab
-          pip install .
+          pip install jupyterlab wheel
+          pip install -r requirements.txt
+      - name: Build wheel
+        run: |
+          python setup.py bdist_wheel
+          pip install dist/*.whl
       - name: Run notebook
         run: |
           cd tests
           jupyter nbconvert --to notebook --inplace --ExecutePreprocessor.timeout=500 --execute example_pystan_jupyter.ipynb
+      - name: Upload wheels
+        run: |
+          pip install twine
+          echo "CURRENT"
+          ls .
+          echo "DIST"
+          ls dist
