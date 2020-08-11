@@ -6,7 +6,7 @@ multiprocessing.set_start_method("spawn", True)
 from importlib import reload
 import stan as _stan
 
-# force reload if stan was imported previously
+# force reload
 _stan = reload(_stan)
 
 from concurrent.futures import ThreadPoolExecutor as _ThreadPoolExecutor
@@ -28,7 +28,7 @@ def _inject_posterior(posterior):
         """"""
         return _exec_async(posterior._sample, **kwargs)
 
-    # Update sample function docstring with posterior.build docstring.
+    # Update sample function docstring with posterior.sample docstring.
     sample.__doc__ += posterior.sample.__doc__
     posterior.sample = sample
 
