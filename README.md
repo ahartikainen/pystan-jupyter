@@ -1,5 +1,14 @@
-# pystan-jupyter
+## pystan-jupyter
 Enable PyStan3 use on Jupyter Notebook/Lab.
+
+https://pypi.org/project/pystan-jupyter/
+
+### Install
+
+    pip install pystan-jupyter
+
+
+### Usage
 
 At the start of the Notebook
 
