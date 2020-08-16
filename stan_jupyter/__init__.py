@@ -9,8 +9,11 @@ import stan as _stan
 # force reload
 _stan = reload(_stan)
 
+from stan import common, fit, model
+
 from concurrent.futures import ThreadPoolExecutor as _ThreadPoolExecutor
 
+__all__ = ["build", "common", "fit", "model"]
 
 def _exec_async(func, *args, **kwargs):
     """Execute an async function in a thread."""
