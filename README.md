@@ -22,7 +22,7 @@ fit = posterior.sample(num_chains=4)
 
 ### Start notebook on WSL2
 
-On WSL2 remember to add (dynamic) ip address to the start command
+On WSL2 remember to add (dynamic) IP address to the start command
 
     jupyter lab --ip $(hostname -I)
     
