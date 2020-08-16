@@ -28,4 +28,4 @@ On WSL2 remember to add (dynamic) ip address to the start command
     
 And access the IP address, port and token combination given on the command window.
 
-     http://192.168.222.17:8888/?token=d7b4e6828f99ed013f914fdbb04a2833ffc6733afc25abaf
+     http://192.168.222.17:8888/?token=<token-code-here>
