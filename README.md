@@ -26,6 +26,10 @@ On WSL2 remember to add (dynamic) IP address to the start command
 
     jupyter lab --ip $(hostname -I)
     
+Users with multiple IP addresses
+
+    jupyter lab --ip $(echo $(hostname -I) | rev | cut -d " " -f1 | rev)
+    
 And access the IP address, port and token combination given on the command window.
 
      http://192.168.222.17:8888/?token=<token-code-here>
