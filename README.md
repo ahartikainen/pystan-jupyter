@@ -1,6 +1,14 @@
 ## pystan-jupyter
 Enable PyStan3 use on Jupyter Notebook/Lab.
 
+Module calls ```nest-asyncio```:
+
+```python
+import nest_asyncio
+nest_asyncio.apply()
+del nest_asyncio
+```
+
 https://pypi.org/project/pystan-jupyter/
 
 ### Install

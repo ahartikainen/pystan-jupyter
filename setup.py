@@ -25,7 +25,7 @@ def get_long_description():
 setup(
     name="pystan-jupyter",
     license="ISC",
-    version="0.1b3",
+    version="0.2b1",
     description="Enable PyStan3 use on Jupyter Notebook/Lab.",
     author="Ari Hartikainen",
     url="https://github.com/ahartikainen/pystan-jupyter",
@@ -34,10 +34,12 @@ setup(
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
     include_package_data=True,
+    license_files = ('LICENSE.txt',),
     classifiers=[
         "Development Status :: 4 - Beta",
         "License :: OSI Approved :: ISC License (ISCL)",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
 )
