@@ -25,7 +25,7 @@ def get_long_description():
 setup(
     name="pystan-jupyter",
     license="ISC",
-    version="0.1b3",
+    version="0.2b1",
     description="Enable PyStan3 use on Jupyter Notebook/Lab.",
     author="Ari Hartikainen",
     url="https://github.com/ahartikainen/pystan-jupyter",
