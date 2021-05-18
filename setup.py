@@ -34,6 +34,7 @@ setup(
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
     include_package_data=True,
+    license_files = ('LICENSE.txt',),
     classifiers=[
         "Development Status :: 4 - Beta",
         "License :: OSI Approved :: ISC License (ISCL)",
