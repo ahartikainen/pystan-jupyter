@@ -1,3 +1,5 @@
+Note: Not recommended approach and is currently broken
+
 ## pystan-jupyter
 Enable PyStan3 use on Jupyter Notebook/Lab.
 
